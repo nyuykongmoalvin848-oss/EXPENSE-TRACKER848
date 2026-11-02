@@ -5,9 +5,10 @@ import TransactionList from '../components/transactions/TransactionList'
 import FilterBar from '../components/transactions/FilterBar'
 
 export default function TransactionsPage () {
-  const { transactions, addTransaction, deleteTransaction } = useTransactions()
+  const { transactions, addTransaction, deleteTransaction, updateTransaction } = useTransactions()
   const [filters, setFilters] = useState({ month: '', type: '', category: '', search: '' })
-
+  const [editing, setEditing] = useState(null)
+ 
   const filtered = useMemo(() => {
     const search = filters.search.trim().toLowerCase()
     const matched = transactions.filter((t) => {
@@ -19,15 +20,24 @@ export default function TransactionsPage () {
     })
     return [...matched].sort((a, b) => b.date.localeCompare(a.date) || (Number(b.id) - Number(a.id)))
   }, [transactions, filters])
-
+ 
+  const handleSubmit = (tx) => {
+    if (editing) {
+      updateTransaction(editing.id, tx)
+      setEditing(null)
+    } else {
+      addTransaction(tx)
+    }
+  }
+ 
   return (
     <>
-      <TransactionForm onSubmit={addTransaction} />
+      <TransactionForm onSubmit={handleSubmit} initial={editing} submitLabel={editing ? 'Update' : 'Add'} onCancel={editing ? () => setEditing(null) : undefined} />
       <FilterBar filters={filters} onChange={setFilters} />
       <div className='list-header'>
         <h3>Transactions ({filtered.length})</h3>
       </div>
-      <TransactionList transactions={filtered} onDelete={deleteTransaction} />
+      <TransactionList transactions={filtered} onDelete={deleteTransaction} onEdit={setEditing} />
     </>
   )
 }

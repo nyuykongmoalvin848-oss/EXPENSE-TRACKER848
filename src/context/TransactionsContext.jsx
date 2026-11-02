@@ -15,9 +15,13 @@ export function TransactionsProvider ({ children }) {
       setTransactions(transactions.filter((t) => t.id !== id))
     }
   }
-
+ 
+  const updateTransaction = (id, tx) => {
+    setTransactions(transactions.map((t) => (t.id === id ? { ...t, ...tx } : t)))
+  }
+ 
   return (
-    <TransactionsContext.Provider value={{ transactions, addTransaction, deleteTransaction }}>
+    <TransactionsContext.Provider value={{ transactions, addTransaction, deleteTransaction, updateTransaction }}>
       {children}
     </TransactionsContext.Provider>
   )

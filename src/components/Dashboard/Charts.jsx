@@ -3,6 +3,14 @@ import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recha
 import { useCategories } from '../../context/CategoriesContext'
 import { getCategoryColor } from '../../constants'
 
+function sanitizeChartData (rawData) {
+  return rawData.map(item => ({
+    ...item,
+    value: typeof item.value === 'number' && !isNaN(item.value) ? item.value : 0,
+    label: item.label ? String(item.label).substring(0, 12) : 'N/A'
+  }))
+}
+
 function Charts ({ transactions }) {
   const { categories } = useCategories()
 
@@ -44,7 +52,7 @@ function Charts ({ transactions }) {
         <h3 className='chart-title'>Income vs Expenses</h3>
         <ResponsiveContainer width='100%' height={250}>
           <PieChart>
-            <Pie data={incomeVsExpense} cx='50%' cy='50%' outerRadius={80} dataKey='value' label>
+            <Pie data={sanitizeChartData(incomeVsExpense)} cx='50%' cy='50%' outerRadius={80} dataKey='value' label>
               {incomeVsExpense.map((_, i) => (
                 <Cell key={i} />
               ))}
@@ -64,7 +72,7 @@ function Charts ({ transactions }) {
           : (
             <ResponsiveContainer width='100%' height={250}>
               <PieChart>
-                <Pie data={spendingByCategory} cx='50%' cy='50%' outerRadius={80} dataKey='value' label>
+                <Pie data={sanitizeChartData(spendingByCategory)} cx='50%' cy='50%' outerRadius={80} dataKey='value' label>
                   {spendingByCategory.map((entry, i) => (
                     <Cell key={`cat-${i}`} fill={entry.color} />
                   ))}

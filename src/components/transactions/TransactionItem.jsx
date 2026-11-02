@@ -1,11 +1,11 @@
 import { useCategories } from '../../context/CategoriesContext'
 import { getCategoryColor } from '../../constants'
 
-export default function TransactionItem ({ transaction, onDelete }) {
+export default function TransactionItem ({ transaction, onDelete, onEdit }) {
   const { categories } = useCategories()
   const cat = categories.find((c) => c.id === transaction.category)
   const color = getCategoryColor(categories, transaction.category)
-
+ 
   return (
     <li className={`list-item ${transaction.type}`}>
       <span className='cat-dot' style={{ backgroundColor: color }} />
@@ -19,6 +19,7 @@ export default function TransactionItem ({ transaction, onDelete }) {
       <span className='tx-amount'>
         {transaction.type === 'income' ? '+' : '-'}${Number(transaction.amount).toFixed(2)}
       </span>
+      <button className='btn-edit' onClick={() => onEdit(transaction)}>Edit</button>
       <button className='btn-delete' onClick={() => onDelete(transaction.id)}>Delete</button>
     </li>
   )

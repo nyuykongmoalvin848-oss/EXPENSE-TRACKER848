@@ -181,7 +181,7 @@ body {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
   gap: 16px;
 }
 
@@ -230,13 +230,11 @@ body {
   color: var(--text-primary);
 }
 
-.empty-state {
-  padding: 24px;
-  text-align: center;
-  color: var(--text-secondary);
-  background: var(--bg-secondary);
-  border: 1px dashed var(--border);
-  border-radius: 8px;
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 300px;
 }
 
 .cat-dot {
@@ -391,6 +389,12 @@ body {
   justify-content: space-between;
   align-items: center;
   margin: 16px 0 8px;
+}
+
+@media (min-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (width <= 768px) {
