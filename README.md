@@ -1,19 +1,22 @@
 # React Expense Tracker
 
-A simple and efficient expense tracker built with React and Vite.
+Live: https://expense-tracker-1-ok7u14qv8-alvin-2431.vercel.app/
 
-## Features
+## Application Overview
 
-- Track income and expenses
-- View transaction history
+React Expense Tracker is a web app for recording income and expenses, organizing them with custom categories, and monitoring budgets with visual charts. It persists data locally so you can track spending over time without a backend.
+
+## Core Features
+
+- Add, edit, and delete transactions
+- Custom categories
+- Budgeting page with budget form
+- Visualizations and dashboard charts
 - Light/dark theme support
 
-## Getting Started
+## Local Installation Steps
 
-### Installation
-
+git clone
+cd REACT-EXPENSE-TRACKER
 npm install
-
-### Development
-
 npm run dev
