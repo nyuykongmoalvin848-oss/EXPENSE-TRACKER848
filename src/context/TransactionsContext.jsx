@@ -16,8 +16,8 @@ export function TransactionsProvider ({ children }) {
     }
   }
  
-  const updateTransaction = (id, tx) => {
-    setTransactions(transactions.map((t) => (t.id === id ? { ...t, ...tx } : t)))
+  const updateTransaction = (id, updatedTransaction) => {
+    setTransactions(prev => prev.map(t => t.id === id ? { ...t, ...updatedTransaction } : t))
   }
  
   return (
