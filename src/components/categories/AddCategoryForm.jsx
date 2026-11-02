@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { CategoriesContext } from '../context/CategoriesContext'
+import { CategoriesContext } from '../../context/CategoriesContext'
 
 export default function AddCategoryForm () {
   const { setCategories } = useContext(CategoriesContext)
