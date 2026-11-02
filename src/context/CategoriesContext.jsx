@@ -1,7 +1,8 @@
 import { createContext, useContext } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-const CategoriesContext = createContext()
+export const CategoriesContext = createContext()
+export default CategoriesContext
 
 const DEFAULT_CATEGORIES = [
   { id: 'food', name: 'Food', color: '#4caf50' },
