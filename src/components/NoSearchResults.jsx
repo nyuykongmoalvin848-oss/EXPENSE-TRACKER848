@@ -1,3 +1,10 @@
+import { SearchX } from 'lucide-react'
+
 export default function NoSearchResults () {
-  return <p className='empty-state'>No transactions match your filters.</p>
+  return (
+    <div className='empty-state'>
+      <SearchX size={40} />
+      <p>No transactions match your filters.</p>
+    </div>
+  )
 }

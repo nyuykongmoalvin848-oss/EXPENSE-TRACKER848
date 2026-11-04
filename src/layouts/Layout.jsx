@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
+import { Sun, Moon } from 'lucide-react'
 
 export default function Layout () {
   const { theme, toggleTheme } = useTheme()
@@ -9,7 +10,7 @@ export default function Layout () {
       <header className='header'>
         <h1 className='title'>Expense Tracker</h1>
         <button className='theme-btn' onClick={toggleTheme} aria-label='Toggle theme'>
-          {theme === 'light' ? 'Dark' : 'Light'}
+          {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
         </button>
       </header>
 

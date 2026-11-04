@@ -1,3 +1,10 @@
+import { ChartNoAxesColumn } from 'lucide-react'
+
 export default function NoChartData () {
-  return <p className='empty-state'>No chart data available.</p>
+  return (
+    <div className='empty-state'>
+      <ChartNoAxesColumn size={40} />
+      <p>No chart data available.</p>
+    </div>
+  )
 }
