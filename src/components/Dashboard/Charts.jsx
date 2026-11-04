@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line } from 'recharts'
 import { useCategories } from '../../context/CategoriesContext'
 import { getCategoryColor } from '../../constants'
 
@@ -14,17 +14,16 @@ function sanitizeChartData (rawData) {
 function Charts ({ transactions }) {
   const { categories } = useCategories()
 
-  const incomeVsExpense = useMemo(() => {
-    const income = transactions
-      .filter(t => t.type === 'income')
-      .reduce((sum, t) => sum + Number(t.amount), 0)
-    const expense = transactions
+  const expensesOverTime = useMemo(() => {
+    const map = {}
+    transactions
       .filter(t => t.type === 'expense')
-      .reduce((sum, t) => sum + Number(t.amount), 0)
-    return [
-      { name: 'Income', value: income },
-      { name: 'Expenses', value: expense }
-    ]
+      .forEach(t => {
+        const day = t.date
+        if (!map[day]) map[day] = { date: day, amount: 0 }
+        map[day].amount += Number(t.amount)
+      })
+    return Object.values(map).sort((a, b) => a.date.localeCompare(b.date))
   }, [transactions])
 
   const spendingByCategory = useMemo(() => {
@@ -49,18 +48,21 @@ function Charts ({ transactions }) {
   return (
     <div className='charts'>
       <div className='chart-card'>
-        <h3 className='chart-title'>Income vs Expenses</h3>
-        <ResponsiveContainer width='100%' height={250}>
-          <PieChart>
-            <Pie data={sanitizeChartData(incomeVsExpense)} cx='50%' cy='50%' outerRadius={80} dataKey='value' label>
-              {incomeVsExpense.map((_, i) => (
-                <Cell key={i} />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </ResponsiveContainer>
+        <h3 className='chart-title'>Expenses Over Time</h3>
+        {expensesOverTime.length === 0
+          ? <p className='empty-state'>No expenses yet.</p>
+          : (
+            <ResponsiveContainer width='100%' height={250}>
+              <BarChart data={expensesOverTime}>
+                <CartesianGrid strokeDasharray='3 3' />
+                <XAxis dataKey='date' />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey='amount' fill='#ef4444' name='Expenses' />
+              </BarChart>
+            </ResponsiveContainer>
+            )}
       </div>
 
       <div className='chart-card'>
@@ -72,7 +74,7 @@ function Charts ({ transactions }) {
           : (
             <ResponsiveContainer width='100%' height={250}>
               <PieChart>
-                <Pie data={sanitizeChartData(spendingByCategory)} cx='50%' cy='50%' outerRadius={80} dataKey='value' label>
+                <Pie data={sanitizeChartData(spendingByCategory)} cx='50%' cy='50%' outerRadius={80} dataKey='value' label nameKey='name'>
                   {spendingByCategory.map((entry, i) => (
                     <Cell key={`cat-${i}`} fill={entry.color} />
                   ))}
