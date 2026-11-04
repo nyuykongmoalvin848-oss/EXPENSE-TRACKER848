@@ -1,10 +1,13 @@
 import TransactionItem from './TransactionItem'
+import NoTransactions from '../NoTransactions'
+import NoSearchResults from '../NoSearchResults'
 
-export default function TransactionList ({ transactions, onDelete, onEdit }) {
+export default function TransactionList ({ transactions, total, onDelete, onEdit }) {
   if (!transactions.length) {
-    return <p className='empty-state'>No transactions yet. Add one above to get started.</p>
+    if (!total) return <NoTransactions />
+    return <NoSearchResults />
   }
- 
+
   return (
     <ul className='list'>
       {transactions.map((t) => (

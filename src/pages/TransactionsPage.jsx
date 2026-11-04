@@ -37,7 +37,7 @@ export default function TransactionsPage () {
       <div className='list-header'>
         <h3>Transactions ({filtered.length})</h3>
       </div>
-      <TransactionList transactions={filtered} onDelete={deleteTransaction} onEdit={setEditing} />
+      <TransactionList transactions={filtered} total={transactions.length} onDelete={deleteTransaction} onEdit={setEditing} />
     </>
   )
 }

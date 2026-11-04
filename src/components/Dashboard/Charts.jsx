@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line } from 'recharts'
 import { useCategories } from '../../context/CategoriesContext'
 import { getCategoryColor } from '../../constants'
+import NoChartData from '../NoChartData'
 
 function sanitizeChartData (rawData) {
   return rawData.map(item => ({
@@ -50,7 +51,7 @@ function Charts ({ transactions }) {
       <div className='chart-card'>
         <h3 className='chart-title'>Expenses Over Time</h3>
         {expensesOverTime.length === 0
-          ? <p className='empty-state'>No expenses yet.</p>
+          ? <NoChartData />
           : (
             <ResponsiveContainer width='100%' height={250}>
               <BarChart data={expensesOverTime}>
@@ -69,7 +70,7 @@ function Charts ({ transactions }) {
         <h3 className='chart-title'>Spending by Category</h3>
         {spendingByCategory.length === 0
           ? (
-            <p className='empty-state'>No expenses yet.</p>
+            <NoChartData />
             )
           : (
             <ResponsiveContainer width='100%' height={250}>
