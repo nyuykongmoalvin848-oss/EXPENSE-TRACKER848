@@ -19,7 +19,7 @@ export default function TransactionItem ({ transaction, onDelete, onEdit }) {
       <span className='tx-amount'>
         {transaction.type === 'income' ? '+' : '-'}${Number(transaction.amount).toFixed(2)}
       </span>
-      <button className='btn-edit' onClick={() => onEdit(transaction)}>Edit</button>
+      <button className='submit' onClick={() => onEdit(transaction)}>Edit</button>
       <button className='btn-delete' onClick={() => onDelete(transaction.id)}>Delete</button>
     </li>
   )

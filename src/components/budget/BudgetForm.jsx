@@ -48,7 +48,7 @@ export default function BudgetForm () {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-        <button type='submit'>Set Budget</button>
+        <button type='submit' className='submit'>Set Budget</button>
       </form>
 
       <ul className='budget-list'>
@@ -66,7 +66,7 @@ export default function BudgetForm () {
                   <span> ${spent.toFixed(2)} / ${limit.toFixed(2)}</span>
                 </div>
                 {limit > 0 && (
-                  <button type='button' onClick={() => removeBudget(c.id)}>Remove</button>
+                  <button type='button' className='submit' onClick={() => removeBudget(c.id)}>Remove</button>
                 )}
               </div>
               {limit > 0 && (

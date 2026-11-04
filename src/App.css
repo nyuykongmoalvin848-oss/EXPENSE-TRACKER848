@@ -107,6 +107,7 @@ body {
 .budget-form select,
 .budget-form input {
   padding: 8px;
+  height: 40px;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--bg-primary);
@@ -280,12 +281,28 @@ body {
 .form input,
 .form select {
   padding: 8px 12px;
+  height: 40px;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--bg-primary);
   color: var(--text-primary);
   flex: 1;
   min-width: 150px;
+}
+
+input[type='color'] {
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  cursor: pointer;
+  padding: 2px;
+}
+
+.form input[type='color'] {
+  flex: 0 0 auto;
+  width: 44px;
+  min-width: 44px;
 }
 
 .submit {
@@ -378,6 +395,7 @@ body {
 .filter-bar input,
 .filter-bar select {
   padding: 8px 12px;
+  height: 40px;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--bg-primary);
