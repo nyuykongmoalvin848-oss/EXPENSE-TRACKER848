@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { useCategories } from '../../context/CategoriesContext'
 import { useBudget } from '../../context/BudgetContext'
 import { useTransactions } from '../../context/TransactionsContext'
-import { getCategoryColor } from '../../constants'
+import { getCategoryColor, formatCurrency } from '../../constants'
 
 export default function BudgetForm () {
   const { categories } = useCategories()
@@ -63,7 +63,7 @@ export default function BudgetForm () {
               <div className='budget-item-header'>
                 <div>
                   <strong>{c.name}</strong>
-                  <span> ${spent.toFixed(2)} / ${limit.toFixed(2)}</span>
+                  <span> {formatCurrency(spent)} / {formatCurrency(limit)}</span>
                 </div>
                 {limit > 0 && (
                   <button type='button' className='submit' onClick={() => removeBudget(c.id)}>Remove</button>
@@ -81,7 +81,7 @@ export default function BudgetForm () {
                     <div className='progress-fill' style={{ width: `${pct}%`, backgroundColor: color }} />
                   </div>
                   {over && (
-                    <span className='over-budget-text'>Over budget by ${(spent - limit).toFixed(2)}</span>
+                    <span className='over-budget-text'>Over budget by {formatCurrency(spent - limit)}</span>
                   )}
                 </>
               )}

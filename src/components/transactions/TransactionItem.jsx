@@ -1,5 +1,5 @@
 import { useCategories } from '../../context/CategoriesContext'
-import { getCategoryColor } from '../../constants'
+import { getCategoryColor, formatCurrency } from '../../constants'
 
 export default function TransactionItem ({ transaction, onDelete, onEdit }) {
   const { categories } = useCategories()
@@ -17,7 +17,7 @@ export default function TransactionItem ({ transaction, onDelete, onEdit }) {
         </span>
       </div>
       <span className='tx-amount'>
-        {transaction.type === 'income' ? '+' : '-'}${Number(transaction.amount).toFixed(2)}
+        {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
       </span>
       <button className='submit' onClick={() => onEdit(transaction)}>Edit</button>
       <button className='btn-delete' onClick={() => onDelete(transaction.id)}>Delete</button>

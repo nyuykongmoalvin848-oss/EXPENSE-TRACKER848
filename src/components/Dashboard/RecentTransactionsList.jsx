@@ -1,5 +1,5 @@
 import { useCategories } from '../../context/CategoriesContext'
-import { getCategoryColor } from '../../constants'
+import { getCategoryColor, formatCurrency } from '../../constants'
 
 function RecentTransactionsList ({ transactions }) {
   const { categories } = useCategories()
@@ -26,7 +26,7 @@ function RecentTransactionsList ({ transactions }) {
               </span>
             </div>
             <span className='tx-amount'>
-              {t.type === 'income' ? '+' : '-'}${Number(t.amount).toFixed(2)}
+              {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount)}
             </span>
           </li>
         )
