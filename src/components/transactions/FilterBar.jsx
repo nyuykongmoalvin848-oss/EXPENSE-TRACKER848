@@ -14,7 +14,9 @@ export default function FilterBar ({ filters, onChange }) {
   const now = new Date()
   for (let i = 0; i < 12; i++) {
     const d = new Date(now.getFullYear(), now.getMonth() - i, 1)
-    months.push({ value: d.toISOString().slice(0, 7), label: d.toLocaleString('en-US', { month: 'long', year: 'numeric' }) })
+    const year = d.getFullYear()
+    const month = String(d.getMonth() + 1).padStart(2, '0')
+    months.push({ value: `${year}-${month}`, label: d.toLocaleString('en-US', { month: 'long', year: 'numeric' }) })
   }
 
   const set = (key, value) => onChange({ ...filters, [key]: value })
