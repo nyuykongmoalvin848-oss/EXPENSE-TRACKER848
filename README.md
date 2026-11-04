@@ -1,6 +1,6 @@
 # React Expense Tracker
 
-Live: https://expense-tracker-1-ok7u14qv8-alvin-2431.vercel.app/
+**Live Demo:** [https://expense-tracker-app.vercel.app](https://expense-tracker-app.vercel.app)
 
 ## Application Overview
 
@@ -16,7 +16,15 @@ React Expense Tracker is a web app for recording income and expenses, organizing
 
 ## Local Installation Steps
 
-git clone
+```bash
+git clone https://github.com/yourusername/REACT-EXPENSE-TRACKER.git
 cd REACT-EXPENSE-TRACKER
 npm install
 npm run dev
+```
+
+## Screenshots
+
+![Dashboard](./screenshots/dashboard.png)
+![Transactions](./screenshots/transactions.png)
+![Budget](./screenshots/budget.png)
